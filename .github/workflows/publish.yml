@@ -44,6 +44,12 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+            - name: Download build archive
+              uses: actions/download-artifact@v2
+              with:
+                  name: aioglobal-hotkeys-win64
+                  path: dist
+
             - name: Publish to TestPyPI
               uses: pypa/gh-action-pypi-publish@release/v1
               with:
