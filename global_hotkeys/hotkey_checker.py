@@ -1,4 +1,4 @@
-from threading import Thread, main_thread
+import asyncio
 
 import time
 import ctypes
@@ -41,18 +41,18 @@ class HotkeyChecker():
                 return hotkey_id
         return None
 
-    def start_checking_hotkeys(self):
+    async def start_checking_hotkeys(self):
         self.state.active = True
-        Thread(target=self.run).start()
+        asyncio.create_task(self.run())
 
     def shutdown_checker(self):
         self.state.active = False
         self.state = EngineState(False)
 
-    def restart_checker(self):
+    async def restart_checker(self):
         self.shutdown_checker()
-        time.sleep(0.7) # bit of a magic number here, just letting the old run thread die out before starting a fresh one.
-        self.start_checking_hotkeys()
+        await asyncio.sleep(0.7) # bit of a magic number here, just letting the old run thread die out before starting a fresh one.
+        await self.start_checking_hotkeys()
 
     def clear_bindings(self):
         self.shutdown_checker()
@@ -102,16 +102,13 @@ class HotkeyChecker():
 
         return True
 
-    def run(self):
+    async def run(self):
         state = self.state
         id_list = self.hotkeys.keys()
 
         while state.active:
-            time.sleep(0.02)
-            # Exit out if the main thread has terminated.
-            if not main_thread().is_alive():
-                break
-            
+            await asyncio.sleep(0.02)
+
             for id in id_list:
                 hotkey = self.hotkeys[id]
                 press_callback, release_callback, key_state = self.hotkey_actions[id]

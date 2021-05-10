@@ -6,14 +6,14 @@ def register_hotkey(key, modifiers, press_callback, release_callback=None):
 def remove_hotkey(key, modifiers):
 	return hotkey_checker.remove_hotkey(key, modifiers)
 
-def start_checking_hotkeys():
-	hotkey_checker.start_checking_hotkeys()
+async def start_checking_hotkeys():
+	await hotkey_checker.start_checking_hotkeys()
 
 def stop_checking_hotkeys():
 	hotkey_checker.shutdown_checker()
 
-def restart_checking_hotkeys():
-	hotkey_checker.restart_checker()
+async def restart_checking_hotkeys():
+	await hotkey_checker.restart_checker()
 
 def register_hotkeys(bindings):
     for binding, keydown_function, keyup_function in bindings:
