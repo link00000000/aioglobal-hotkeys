@@ -4,9 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pywin32 = "*"
+pywin32 = "300"
 
 [dev-packages]
+pipenv-setup = "3.1.1"
 
 [requires]
 python_version = "3.9"
+
+[scripts]
+generate-dependencies="pipenv-setup sync --dev"
