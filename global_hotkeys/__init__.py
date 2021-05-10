@@ -41,3 +41,9 @@ def remove_hotkeys(bindings):
 # *Note that this also stops the hotkey checking thread.
 def clear_hotkeys():
     hotkey_checker.clear_bindings()
+
+async def listen():
+    await hotkey_checker.start_checking_hotkeys()
+
+    while True:
+        await asyncio.sleep(0.1)
