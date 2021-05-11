@@ -41,7 +41,7 @@ class HotkeyChecker():
                 return hotkey_id
         return None
 
-    async def start_checking_hotkeys(self):
+    def start_checking_hotkeys(self):
         self.state.active = True
         asyncio.create_task(self.run())
 

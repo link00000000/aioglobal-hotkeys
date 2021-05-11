@@ -1,5 +1,4 @@
 import asyncio
-
 import global_hotkeys
 
 is_running = True
@@ -11,8 +10,7 @@ def shutdown():
 async def main():
     global_hotkeys.register_hotkeys([
         [["control", "shift", "q"], None, shutdown],
-        [["control", "shift", "7"], lambda: print("Key down"), lambda: print("Key up")],
-        [["control", "shift", "6"], lambda: print("Key down"), lambda: print("Key up")],
+        [["control", "shift", "7"], lambda: print("Key down"), lambda: print("Key up")]
     ])
 
     await global_hotkeys.listen()

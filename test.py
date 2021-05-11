@@ -11,11 +11,10 @@ def shutdown():
 async def main():
     global_hotkeys.register_hotkeys([
         [["control", "shift", "q"], None, shutdown],
-        [["control", "shift", "7"], lambda: print("Key down"), lambda: print("Key up")],
-        [["control", "shift", "6"], lambda: print("Key down"), lambda: print("Key up")],
+        [["control", "shift", "7"], lambda: print("Key down"), lambda: print("Key up")]
     ])
 
-    await global_hotkeys.start_checking_hotkeys()
+    global_hotkeys.start_checking_hotkeys()
 
     while is_running:
         await asyncio.sleep(0.1)

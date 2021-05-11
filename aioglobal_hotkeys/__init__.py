@@ -6,8 +6,8 @@ def register_hotkey(key, modifiers, press_callback, release_callback=None):
 def remove_hotkey(key, modifiers):
 	return hotkey_checker.remove_hotkey(key, modifiers)
 
-async def start_checking_hotkeys():
-	await hotkey_checker.start_checking_hotkeys()
+def start_checking_hotkeys():
+	hotkey_checker.start_checking_hotkeys()
 
 def stop_checking_hotkeys():
 	hotkey_checker.shutdown_checker()
@@ -43,7 +43,7 @@ def clear_hotkeys():
     hotkey_checker.clear_bindings()
 
 async def listen():
-    await hotkey_checker.start_checking_hotkeys()
+    hotkey_checker.start_checking_hotkeys()
 
     while True:
         await asyncio.sleep(0.1)
