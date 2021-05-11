@@ -126,7 +126,7 @@ class HotkeyChecker():
                     self.hotkey_actions[id][2] = True
                     if not key_state:
                         if press_callback != None:
-                            if inspect.iscoroutinefunction(press_callback)
+                            if inspect.iscoroutinefunction(press_callback):
                                 await press_callback()
                             else:
                                 press_callback()
@@ -134,7 +134,7 @@ class HotkeyChecker():
                     self.hotkey_actions[id][2] = False
                     if key_state:
                         if release_callback != None:
-                            if inspect.iscoroutinefunction(release_callback)
+                            if inspect.iscoroutinefunction(release_callback):
                                 await release_callback()
                             else:
                                 release_callback()
