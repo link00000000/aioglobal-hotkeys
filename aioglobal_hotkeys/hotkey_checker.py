@@ -122,6 +122,16 @@ class HotkeyChecker():
                         pressed = False
                         break
                 
+                # Check if control, shift, or alt are pressed when they shouldn't
+                # This is a hacky workaround and should probably request the entire keyboard
+                # state instead to check for conflicts with any other key
+                if pressed:
+                    print("HIT")
+                    for modifier_key in ["shift", "control", "alt"]:
+                        if win32api.GetAsyncKeyState(_to_virtualkey(modifier_key)) and _to_virtualkey(modifier_key) not in hotkey:
+                            pressed = False
+                            break
+
                 if pressed:
                     self.hotkey_actions[id][2] = True
                     if not key_state:
